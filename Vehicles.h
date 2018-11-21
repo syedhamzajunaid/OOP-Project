@@ -2,7 +2,7 @@
 
 class Vehicles: public GameObject
 {
-private:
+protected:
     int speed_x, speed_y ;
     float friction ;
     double angle ;
