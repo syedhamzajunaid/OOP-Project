@@ -1,0 +1,27 @@
+For making the coordinates of all rects and textures modular.
+
+// This struct is called SDL_Dimensions.h
+struct dimension 
+{
+	static int Screen_width() 
+	
+	{	
+		
+		return 1024;
+
+	}
+
+	
+
+	static int Screen_height() 
+	
+	{
+		
+		return 768;
+	
+	}
+
+};
+
+
+Please update the Map.h_Eraj as given in  Eraj_Map.h
