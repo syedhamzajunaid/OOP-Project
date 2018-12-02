@@ -1,7 +1,10 @@
 #pragma once
 #include "GameLoop.h"
 #include "Point.h"
+#include "GameObject.h"
+//#include "PlayerVan.h"
 
+class PlayerVan;
 class GameObject
 {
     public:
@@ -18,6 +21,7 @@ class GameObject
 		bool is_present() { return present;}
 		int GetType(){return type;};
         virtual void PowerUp() {};
+        //virtual void PowerUp(PlayerVan player) {};
         float GetFuel() ;
         SDL_Rect GetDestRect();
         void  SetFuel(float new_fuel) ;

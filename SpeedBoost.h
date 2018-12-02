@@ -1,6 +1,6 @@
 #pragma once
 #include "Powerups.h"
-#include "PlayerVan.h"
+//#include "PlayerVan.h"
 
 class SpeedBoost:public Powerups
 {
@@ -12,5 +12,5 @@ public:
     SpeedBoost(const char* path,int x, int y) ;
     ~SpeedBoost();
     void Render();
-    void PowerUp(PlayerVan* player);
+    void PowerUp();
 };

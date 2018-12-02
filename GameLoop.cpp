@@ -10,8 +10,6 @@
 #include "LTexture.h"
 #include "Map.h"
 #include "GameObject.h"
-//#include "Vehicles.h"
-//#include "PlayerVan.h"
 #include "Queue.h"
 #include "Powerups.h"
 #include "SpeedBoost.h"
@@ -21,11 +19,12 @@
 #include "Rubble.h"
 #include "FuelBoost.h"
 #include "SDL_Dimensions.h"
-
+class GameObject;
+class GameLoop;
 class PlayerVan;
 class Vehicles;
 
-PlayerVan* playervan = NULL;
+PlayerVan* GameLoop::playervan = NULL;
 Queue* objects_queue ;
 GameObject* timeboost = NULL ;
 SDL_Renderer* GameLoop::grenderer = NULL;

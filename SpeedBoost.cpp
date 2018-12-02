@@ -2,8 +2,8 @@
 #include "SpeedBoost.h"
 #include "LTexture.h"
 #include "GameObject.h"
-
-
+#include "PlayerVan.h"
+//class PlayerVan;
 
 SpeedBoost::SpeedBoost(const char* path,int x, int y):Powerups()
 {
@@ -57,10 +57,11 @@ void SpeedBoost::Render()
 
 }
 
-void SpeedBoost::PowerUp(PlayerVan* player)
+void SpeedBoost::PowerUp()
 {
     std::cout << "SpeedBoost power-up." << std::endl ;
-    std::cout << "Speed before power-up: " << player->get_speed() << std::endl ;
-    player->set_speed(player->get_speed() + 2);
-    std::cout <<< "Speed after power-up: " << player->get_speed() << std::endl ;
+    std::cout << "Speed before power-up: " << GameLoop::playervan->get_speed() <<  std::endl ;
+    GameLoop::playervan->set_speed(GameLoop::playervan->get_speed() + 2);
+    std::cout << "Speed after power-up: " << GameLoop::playervan->get_speed() <<std::endl ;
 }
+

@@ -164,7 +164,7 @@ void Queue::CollisionManager()
                 if (GameLoop::CheckCollision(player->GetDestRect(),temp->G_obj->GetDestRect()))
                 {
                     std::cout << "FuelBoost hit." << std::endl ;
-                    temp->G_obj->PowerUp(GameLoop::playervan);
+                    temp->G_obj->PowerUp();
                     temp->G_obj->~GameObject() ;
                     collision_check = true;
                 }
@@ -177,7 +177,7 @@ void Queue::CollisionManager()
                 if (GameLoop::CheckCollision(player->GetDestRect(),temp->G_obj->GetDestRect()))
                 {
                     std::cout << "SpeedBoost hit." << std::endl ;
-                    temp->G_obj->PowerUp(GameLoop::playervan);
+                    temp->G_obj->PowerUp();
                     temp->G_obj->~GameObject() ;
                     collision_check = true;
                 }

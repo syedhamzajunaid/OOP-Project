@@ -4,11 +4,13 @@
 #include <iostream>
 #include <stdio.h>
 #include "LTexture.h"
-#include "GameObject.h"
+//#include "GameObject.h"
 #include "Point.h"
 #include "Timer.h"
-#include "PlayerVan.h"
+#include "GameObject.h"
 
+class PlayerVan ;
+//class GameObject;
 using namespace std;
 class GameLoop
 {
@@ -16,6 +18,7 @@ class GameLoop
         GameLoop();
         ~GameLoop();
         static PlayerVan* playervan ;
+        //static PlayerVan player;
         static bool CheckCollision(SDL_Rect A, SDL_Rect B);
         void init(const char*, int posx, int posy, int width, int height, bool fullscreen);
         void handleevents();

@@ -3,7 +3,9 @@
 #include "LTexture.h"
 #include "GameObject.h"
 #include "PlayerVan.h"
+#include "GameLoop.h"
 
+//class GameLoop;
 
 FuelBoost::FuelBoost(const char* path,int x, int y):Powerups()
 {
@@ -57,10 +59,11 @@ void FuelBoost::Render()
 
 }
 
-void FuelBoost::PowerUp(PlayerVan* player)
+void FuelBoost::PowerUp()
 {
    std::cout << "FuelBoost" << std::endl ;
-   std::cout << "Fuel before power-up: " << player->get_fuel() << std::endl ;
-   player->set_fuel(player->get_fuel() + 10.0) ;
-      std::cout << "Fuel after power-up: " << player->get_fuel() << std::endl ;
+   std::cout << "Fuel before power-up: " << GameLoop::playervan->get_fuel() <<std::endl ;
+   GameLoop::playervan->set_fuel(GameLoop::playervan->get_fuel() + 10.0) ;
+    std::cout << "Fuel after power-up: " <<  GameLoop::playervan->get_fuel()  <<std::endl ;
 }
+
