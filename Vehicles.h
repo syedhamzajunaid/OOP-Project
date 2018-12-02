@@ -1,21 +1,18 @@
 #pragma once
 #include "GameObject.h"
 
+//class GameObject ;
+
 class Vehicles: public GameObject
 {
 protected:
-    int speed_x, speed_y ; // variables to control the motion of the vehicle.
-    float friction ; // variable to smoothen the animation.
-    double angle ;
+    int speed  ;
+    int xpos , ypos ;
+    float friction ;
 public:
-    //---Construtor and Destructor.
-    Vehicles() {};
-    ~Vehicles()
-    {
-        std::cout << "Vehicle destroyed." << std::endl ;
-    } ;
-    //---Pure Virtual Functions.
+    Vehicles();
+    ~Vehicles();
     virtual void Render() = 0 ;
-    virtual void Move() = 0 ;
-    virtual void Update() = 0 ;
+    virtual void Move(SDL_Event e,SDL_Rect* blocks) = 0  ;
+    virtual void Update(SDL_Event e,SDL_Rect*blocks) = 0  ;
 };

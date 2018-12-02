@@ -1,9 +1,8 @@
+#include <string>
+#include <math.h>
+
 #include "Timer.h"
 #include "GameLoop.h"
-#include "Word.h"
-#include "string"
-#include "iostream"
-#include <math.h> 
 using namespace std;
 
 Timer::Timer()
@@ -68,6 +67,7 @@ bool Timer::is_time_up()
 {
 	return time_up;
 }
+/*
 void Timer::Render(LTexture* font_spr)
 {
 	if (frame % 240 == 0 and started and !paused and start_ticks >1)
@@ -83,7 +83,7 @@ void Timer::Render(LTexture* font_spr)
 		cout << c << '\n';
 
 		// Making 'Time 00:00'
-		Word* t_val = new Word(c,font_spr,881,4);
+	//	Word* t_val = new Word(c,font_spr,881,4);
 
 		//t_val->Render(GameLoop::grenderer);
 		// use word and character
@@ -97,3 +97,4 @@ void Timer::Render(LTexture* font_spr)
 	frame++;
 }
 
+*/

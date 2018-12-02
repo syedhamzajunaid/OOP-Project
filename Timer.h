@@ -28,4 +28,6 @@ public:
 	bool is_started();
 	bool is_paused();
 	bool is_time_up();
+	void set_ticks(int ticks) {this->start_ticks = ticks;};
+	int get_ticks() {return this->start_ticks;};
 };
