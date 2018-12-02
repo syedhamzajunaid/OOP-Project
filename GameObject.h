@@ -1,17 +1,12 @@
 #pragma once
 #include "GameLoop.h"
 #include "Point.h"
-#include "GameObject.h"
-//#include "PlayerVan.h"
 
-class PlayerVan;
 class GameObject
 {
     public:
         GameObject();
-       // GameObject();
         ~GameObject();
-        //static PlayerVan* playervan;
         virtual void Update(SDL_Event e, SDL_Rect* blocks);
         virtual void Render();
         Point GetPosition(){return pos;};
@@ -21,16 +16,12 @@ class GameObject
 		bool is_present() { return present;}
 		int GetType(){return type;};
         virtual void PowerUp() {};
-        //virtual void PowerUp(PlayerVan player) {};
         float GetFuel() ;
         SDL_Rect GetDestRect();
         void  SetFuel(float new_fuel) ;
         float GetTime() ;
         virtual void PickUp(GameObject* student) {} ;
-
-    //static PlayerVan* GetPlayer() ;
         void SetTime(float new_time) ;
-//		SDL_Rect GetDestRect();
 
     protected:
 		Point pos;
@@ -42,5 +33,3 @@ class GameObject
 		bool present;
 
 };
-
-

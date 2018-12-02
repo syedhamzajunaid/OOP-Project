@@ -4,8 +4,6 @@
 
 GameObject::GameObject(){}
 
-
-
 GameObject::~GameObject()
 {
     SDL_DestroyTexture(objTexture);
@@ -18,7 +16,7 @@ GameObject::~GameObject()
 void GameObject::Render()
 {
 	// Renders all objects on screen
-	SDL_RenderCopyEx(GameLoop::grenderer, objTexture,&srcrect, &destrect, angle, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(GameLoop::grenderer, objTexture,NULL, &destrect, angle, NULL, SDL_FLIP_NONE);
 }
 
 bool GameObject::check_collision(SDL_Rect B, SDL_Rect A)
@@ -65,102 +63,99 @@ bool GameObject::check_collision(SDL_Rect B, SDL_Rect A)
 
 void GameObject::Update(SDL_Event e, SDL_Rect* blocks)
 {
-    if (e.type == SDL_KEYDOWN)
+    if(e.key.keysym.sym == SDLK_LEFT)
     {
-        if(e.key.keysym.sym == SDLK_LEFT)
+        if(angle != -90)
         {
-            if(angle != 180)
-            {
-                angle = 180;
-            }
-            pos.x = pos.x - 2;
-            destrect.x = pos.x;
-            for(int i = 0; i < 41; i++)
-            {
-                if(check_collision(blocks[i], destrect))
-                {
-                    collision = true;
-                    break;
-                }
-            }
-			if (collision)
-			{
-				pos.x = pos.x + 2;
-				destrect.x = pos.x;
-				collision = false;
-			}
+            angle = -90;
         }
-
-       else if(e.key.keysym.sym == SDLK_RIGHT)
+        pos.x = pos.x - 2;
+        destrect.x = pos.x;
+        for(int i = 0; i < 41; i++)
         {
-            if(angle != 0)
+            if(check_collision(blocks[i], destrect))
             {
-                angle = 0;
+                collision = true;
+                break;
             }
+        }
+        if (collision)
+        {
             pos.x = pos.x + 2;
             destrect.x = pos.x;
-            for(int i = 0; i < 41; i++)
+            collision = false;
+        }
+    }
+
+   else if(e.key.keysym.sym == SDLK_RIGHT)
+    {
+        if(angle != 90)
+        {
+            angle = 90;
+        }
+        pos.x = pos.x + 2;
+        destrect.x = pos.x;
+        for(int i = 0; i < 41; i++)
+        {
+            if(check_collision(blocks[i], destrect))
             {
-                if(check_collision(blocks[i], destrect))
-                {
-                    collision = true;
-                    break;
-                }
-            }
-            if(collision)
-            {
-                pos.x = pos.x - 2;
-                destrect.x = pos.x;
-                collision = false;
+                collision = true;
+                break;
             }
         }
-
-        else if(e.key.keysym.sym == SDLK_UP)
+        if(collision)
         {
-            if(angle != -90)
+            pos.x = pos.x - 2;
+            destrect.x = pos.x;
+            collision = false;
+        }
+    }
+
+    else if(e.key.keysym.sym == SDLK_UP)
+    {
+        if(angle != 0)
+        {
+            angle = 0;
+        }
+        pos.y = pos.y - 2;
+        destrect.y = pos.y;
+        for(int i = 0; i < 41; i++)
+        {
+            if(check_collision(blocks[i], destrect))
             {
-                angle = -90;
-            }
-            pos.y = pos.y - 2;
-            destrect.y = pos.y;
-            for(int i = 0; i < 41; i++)
-            {
-                if(check_collision(blocks[i], destrect))
-                {
-                    collision = true;
-                    break;
-                }
-            }
-            if(collision)
-            {
-                pos.y = pos.y + 2;
-                destrect.y = pos.y;
-                collision = false;
+                collision = true;
+                break;
             }
         }
-
-        else if(e.key.keysym.sym == SDLK_DOWN)
+        if(collision)
         {
-            if(angle != 90)
-            {
-                angle = 90;
-            }
             pos.y = pos.y + 2;
             destrect.y = pos.y;
-            for(int i = 0; i < 41; i++)
+            collision = false;
+        }
+    }
+
+    else if(e.key.keysym.sym == SDLK_DOWN)
+    {
+        if(angle != 180)
+        {
+            angle = 180;
+        }
+        pos.y = pos.y + 2;
+        destrect.y = pos.y;
+        for(int i = 0; i < 41; i++)
+        {
+            if(check_collision(blocks[i], destrect))
             {
-                if(check_collision(blocks[i], destrect))
-                {
-                    collision = true;
-                    break;
-                }
+                collision = true;
+                break;
             }
-            if(collision)
-            {
-                pos.y = pos.y - 2;
-                destrect.y = pos.y;
-                collision = false;
-            }
+        }
+        if(collision)
+        {
+            pos.y = pos.y - 2;
+            destrect.y = pos.y;
+            collision = false;
         }
     }
 }
@@ -169,4 +164,3 @@ SDL_Rect GameObject::GetDestRect()
 {
     return destrect;
 }
-

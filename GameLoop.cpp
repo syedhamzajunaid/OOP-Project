@@ -10,6 +10,8 @@
 #include "LTexture.h"
 #include "Map.h"
 #include "GameObject.h"
+//#include "Vehicles.h"
+//#include "PlayerVan.h"
 #include "Queue.h"
 #include "Powerups.h"
 #include "SpeedBoost.h"
@@ -19,24 +21,20 @@
 #include "Rubble.h"
 #include "FuelBoost.h"
 #include "SDL_Dimensions.h"
-class GameObject;
-class GameLoop;
-class PlayerVan;
-class Vehicles;
 
-PlayerVan* GameLoop::playervan = NULL;
-Queue* objects_queue ;
-GameObject* timeboost = NULL ;
+GameObject *playervan;
 SDL_Renderer* GameLoop::grenderer = NULL;
 Map *city_map;
-Timer GameLoop::timer;
+Enemy *enemy, *enemy2, *enemy3, *enemy4;
+int frame = 0;
+
+int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 GameLoop::GameLoop()
 {}
 
 GameLoop::~GameLoop()
 {}
-
 
 void GameLoop::init(const char* title, int posx, int posy, int width, int height, bool fullscreen)
 {
@@ -45,9 +43,6 @@ void GameLoop::init(const char* title, int posx, int posy, int width, int height
     {
         flags = SDL_WINDOW_FULLSCREEN;
     }
-
-	int Screen_Width = dimension::Screen_width();
-	int Screen_Height = dimension::Screen_height();
 
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 )
@@ -60,7 +55,7 @@ void GameLoop::init(const char* title, int posx, int posy, int width, int height
         gwindow = SDL_CreateWindow(title, posx, posy, width, height, flags);
         if( gwindow == NULL )
 		{
-			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+			printf( "Window could not be created!SDL_Error: %s\n", SDL_GetError() );
 			isrunning = false;
 		}
 		else
@@ -76,7 +71,6 @@ void GameLoop::init(const char* title, int posx, int posy, int width, int height
             }
             isrunning = true;
 		}
-
     }
     objects_queue = new Queue() ;
      city_map = new Map("Assets/Map.png");
@@ -155,7 +149,6 @@ void GameLoop::init(const char* title, int posx, int posy, int width, int height
 void GameLoop::update()
 {
     city_map->Update();
-
 }
 
 void GameLoop::handleevents()
@@ -163,7 +156,6 @@ void GameLoop::handleevents()
     SDL_Event e;
     int x, y;
     SDL_GetMouseState( &x, &y );
-
     while(SDL_PollEvent(&e)!=0)
     {
         if(e.type == SDL_QUIT)
@@ -173,27 +165,29 @@ void GameLoop::handleevents()
         }
         else if(e.type == SDL_MOUSEBUTTONDOWN)
         {
-            //cout << x << " " << y << endl;
+            cout << x << " " << y << endl;
         }
-        else
+        else if(e.type == SDL_KEYDOWN)
         {
-
             playervan->Update(e, city_map->blocks);
         }
     }
 }
 
+
 void GameLoop::render()
 {
+    frame++;
     SDL_RenderClear(grenderer);
     city_map->Render();
-    playervan->Render();
+	playervan->Render();
 	playervan->SetFuel();
-    objects_queue->Render();
-    this->handleevents(); // Update van
+	objects_queue->Render();
+    this->handleevents();
     objects_queue->CollisionManager();
-	SDL_RenderPresent(grenderer);
+    SDL_RenderPresent(grenderer);
 }
+
 
 
 // For random position of powerups and obs
@@ -252,14 +246,11 @@ bool GameLoop::is_present(Point* arr, int Size, Point point)
 }
 
 
+
 void GameLoop::close()
 {
     SDL_DestroyWindow(gwindow);
     SDL_DestroyRenderer(grenderer);
-    objects_queue->Clean();
     SDL_Quit();
     cout << "game cleaned" << endl;
 }
-
-
-
